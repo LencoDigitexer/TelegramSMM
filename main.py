@@ -1,8 +1,11 @@
-import telebot
+import telebot # импорт api бота
+
+# импорт виртуального окружения для получения токена
 import os
 from dotenv import load_dotenv
 load_dotenv()
 telegram_bot_token = os.getenv("telegram_bot_token")
+#####################
 
 
 bot = telebot.TeleBot(telegram_bot_token)
