@@ -1,8 +1,11 @@
+addict==2.2.0
 certifi==2020.4.5.1
 chardet==3.0.4
-idna==2.9
+dvach.api==1.0.0
+idna==2.8
 pyTelegramBotAPI==3.6.7
 python-dotenv==0.13.0
-requests==2.23.0
+requests==2.21.0
+simplejson==3.16.0
 six==1.14.0
-urllib3==1.25.9
+urllib3==1.24.3
