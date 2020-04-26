@@ -37,6 +37,7 @@ def get_pic(message, desk, thread_num):
 
 @bot.message_handler(content_types=['text'])
 def start(message):
+    print(message.text)
     if message.text == 'добавить':
         bot.send_message(message.chat.id, "Добавьте ссылку на двач")
         bot.register_next_step_handler(message, link_parse)
