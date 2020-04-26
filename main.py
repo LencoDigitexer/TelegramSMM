@@ -12,15 +12,18 @@ bot = telebot.TeleBot(telegram_bot_token) # включение бота
 
 # Парсинг ссылки
 def link_parse(message):
-    link = message.text
-    link = link.split('/')
-    if link[2] == "2ch.hk":
-        desk = link[3]
-        thread_num = link[5].split(".")[0]
-        bot.send_message(message.chat.id, "Готово, даю первую картинку в треде")
-        get_pic(message, desk, thread_num)
-    else:
-        bot.send_message(message.chat.id, "Это не двач")
+    try:
+        link = message.text
+        link = link.split('/')
+        if link[2] == "2ch.hk":
+            desk = link[3]
+            thread_num = link[5].split(".")[0]
+            bot.send_message(message.chat.id, "Готово, даю первую картинку в треде")
+            get_pic(message, desk, thread_num)
+        else:
+            bot.send_message(message.chat.id, "Это не двач")
+    except:
+        bot.send_message(message.chat.id, "Это точно рабочая ссылка?")
 
 #--------------------------
 
