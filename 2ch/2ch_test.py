@@ -1,11 +1,11 @@
 import api2ch
+import html2text
 api = api2ch.DvachApi('gg')
 thread = api.get_thread(795678)
 print(f'Total {len(thread)} posts in thread')
+pic = []
+print(thread[0].files)
+for i in range(0, len(thread[0].files)):
+    pic.append("https://2ch.hk" + thread[0].files[i].thumbnail)
 
-pic_in_thread = []
-
-for post in thread:
-    for file in post.files:
-        pic_in_thread.append(api2ch.CHAN_URL + file.path)
-print(pic_in_thread[0])
+print(thread[0].subject)
