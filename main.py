@@ -46,19 +46,18 @@ def get_info_for_thread(message, desk, thread_num):
     text_of_OP = html2text.html2text(thread[0].comment)
     len_thread = "Всего " + str(len(thread)) + " постов"
     #--------------------
-
     # генерация текста о треде
     response_text = "\n" + \
         thread[0].subject + \
-        "\n--------------------------------------------------\n" + \
+        "\n\n" + \
         len_thread + \
-        "\n--------------------------------------------------\n\n" + \
-        text_of_OP
-
+        "\n\n" + \
+        text_of_OP[:900]
+ 
     pic = []
     file_url = "https://2ch.hk" + str(thread[0].files[0].path)
     pic.append(file_url)
-    print(pic[0])
+
     media = [InputMediaPhoto(pic[0], caption=response_text)]
 
     for i in range(1, len(thread[0].files)):
