@@ -1,4 +1,6 @@
 import telebot # импорт api бота
+from telebot.types import Message
+from telebot import types
 from telebot.types import InputMediaPhoto
 import api2ch # апи двача
 import html2text #чтобы красово выглядили посты с двача без меток <br> им прочей лабуды
@@ -64,10 +66,25 @@ def get_info_for_thread(message, desk, thread_num):
         file_url = "https://2ch.hk" + str(thread[0].files[i].path)
         pic.append(file_url)
         media.append(InputMediaPhoto(pic[i]))
+
     bot.send_media_group(message.chat.id, media)
+    
+
+    keyboard = types.InlineKeyboardMarkup(); #наша клавиатура
+    key_yes = types.InlineKeyboardButton(text='Да', callback_data='yes'); #кнопка «Да»
+    keyboard.add(key_yes); #добавляем кнопку в клавиатуру
+    key_no= types.InlineKeyboardButton(text='Нет', callback_data='no');
+    keyboard.add(key_no);
+    
+    bot.send_message(message.chat.id, "Что делать будем?", )
 
 
-
+@bot.callback_query_handler(func=lambda call: True)
+def callback_worker(call):
+    if call.data == "yes": #call.data это callback_data, которую мы указали при объявлении кнопки
+        bot.send_message(call.message.chat.id, 'Запомню : )');
+    elif call.data == "no":
+        pass
     
 
 
@@ -75,14 +92,13 @@ def get_info_for_thread(message, desk, thread_num):
 def start(message):
     link_parse(message) #если это ссылка на тред, то ответ информацией о нем
     if message.text == "test":
-        pic = []
-        pic.append("https://2ch.hk/ruvn/src/50464/15254588002100.png")
-        pic.append("https://2ch.hk/ruvn/thumb/50464/15254588002431s.jpg")
-        text = "test"
-        media = [InputMediaPhoto(pic[0], caption=text)]
-        media.append(InputMediaPhoto(pic[1]))
-        bot.send_media_group(message.chat.id, media) 
-
+        keyboard = types.InlineKeyboardMarkup(); #наша клавиатура
+        key_yes = types.InlineKeyboardButton(text='Да', callback_data='yes'); #кнопка «Да»
+        keyboard.add(key_yes); #добавляем кнопку в клавиатуру
+        key_no= types.InlineKeyboardButton(text='Нет', callback_data='no');
+        keyboard.add(key_no);
+        question = 'Тебе  лет, тебя зовут'
+        bot.send_message(message.from_user.id, text=question, reply_markup=keyboard)
 
 
 bot.polling(none_stop=True, interval=0)
