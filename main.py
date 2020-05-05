@@ -76,7 +76,7 @@ def get_info_for_thread(message, desk, thread_num):
     key_no= types.InlineKeyboardButton(text='Нет', callback_data='no');
     keyboard.add(key_no);
     
-    bot.send_message(message.chat.id, "Что делать будем?", )
+    bot.send_message(message.chat.id, "Что делать будем?", reply_markup=keyboard)
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -98,7 +98,7 @@ def start(message):
         key_no= types.InlineKeyboardButton(text='Нет', callback_data='no');
         keyboard.add(key_no);
         question = 'Тебе  лет, тебя зовут'
-        bot.send_message(message.from_user.id, text=question, reply_markup=keyboard)
+        bot.send_message(message.chat.id, text=question, reply_markup=keyboard)
 
 
 bot.polling(none_stop=True, interval=0)
