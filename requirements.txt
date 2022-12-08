@@ -1,5 +1,5 @@
 addict==2.2.0
-certifi==2020.4.5.1
+certifi==2022.12.7
 chardet==3.0.4
 dvach.api==1.0.0
 html2text==2020.1.16
